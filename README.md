@@ -1,6 +1,10 @@
-# jobs_app
+# counter_app
 
 A new Flutter project.
+
+## 画像
+<img src="https://user-images.githubusercontent.com/92189386/157223877-aaef920b-93ee-4df9-b4e0-5ba0743a4755.png" width="300">
+
 
 ## Getting Started
 
