@@ -37,7 +37,7 @@ class Home extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // ⑦状態を操作する
-          _counterNotifier.state = 1;
+          _counterNotifier.state++;
         },
         child: const Icon(Icons.add),
       ),
