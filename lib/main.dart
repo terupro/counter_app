@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  // ①MyAppでProviderを利用できるようにする
+  // ①ProviderScopeで囲む
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -14,26 +14,30 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ②カウンター表示用にStateProviderを作成
+// ②カウンターの状態を管理をする
 final counterProvider = StateProvider((ref) => 0);
 
 // ③ConsumerWidgetを継承する
 class Home extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ④状態管理している値を取得する
+    final _counterProvider = ref.watch(counterProvider);
+    // ⑤状態管理している値を操作できるようにする
+    final _counterNotifier = ref.watch(counterProvider.notifier);
     return Scaffold(
       appBar: AppBar(title: const Text('Riverpod Counter')),
       body: Center(
-        child: Consumer(builder: (context, ref, _) {
-          final count = ref.watch(counterProvider); // ④状態の監視と取得
-          return Text('$count',
-              style: TextStyle(fontSize: 150, color: Colors.lightBlueAccent));
-        }),
+        child: Text(
+          // ⑥状態を表示する
+          '$_counterProvider',
+          style: const TextStyle(fontSize: 150, color: Colors.lightBlueAccent),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // ⑤状態の更新
-          ref.read(counterProvider.state).update((state) => state + 1); // 1加算する
+          // ⑦状態を操作する
+          _counterNotifier.state = 1;
         },
         child: const Icon(Icons.add),
       ),
