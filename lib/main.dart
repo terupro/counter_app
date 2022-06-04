@@ -22,7 +22,7 @@ class Home extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // ④状態管理している値を取得する
-    final _counterProvider = ref.watch(counterProvider);
+    final _counterState = ref.watch(counterProvider);
     // ⑤状態管理している値を操作できるようにする
     final _counterNotifier = ref.watch(counterProvider.notifier);
     return Scaffold(
@@ -30,7 +30,7 @@ class Home extends ConsumerWidget {
       body: Center(
         child: Text(
           // ⑥状態を表示する
-          '$_counterProvider',
+          '$_counterState',
           style: const TextStyle(fontSize: 150, color: Colors.lightBlueAccent),
         ),
       ),
